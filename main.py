@@ -1,5 +1,4 @@
 import os
-import argparse
 import gc
 import random
 import shutil
@@ -184,6 +183,12 @@ def main():
             bot.reply_to(message, "Something wrong please check")
         bot.delete_message(reply_message.chat.id, reply_message.message_id)
         gc.collect()
+
+    @bot.message_handler(commands=['help', 'start'])
+    def send_welcome(message):
+        bot.reply_to(message, """\
+        Hi there, I am PlayerBot made by ydjb.\
+        """)
 
     # Start bot
     print("Starting tg collections bot.")
