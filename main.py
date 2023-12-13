@@ -90,7 +90,7 @@ def draw_pretty_map(location, style, output_file):
 
 def main():
     # Read tg_token
-    env_vars = dotenv_values()
+    env_vars = dotenv_values(".env")
     tg_token = env_vars["TG_TOKEN"]
 
     # Init bot
