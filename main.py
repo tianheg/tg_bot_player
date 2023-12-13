@@ -16,6 +16,7 @@ from prettymapp.plotting import Plot as PrettyPlot
 from prettymapp.settings import STYLES
 from telebot import TeleBot  # type: ignore
 from telebot.types import BotCommand, Message  # type: ignore
+from dotenv import dotenv_values
 
 PIL.Image.MAX_IMAGE_PIXELS = 933120000
 MAX_IN_MEMORY = 10 * 1024 * 1024  # 10MiB
@@ -88,14 +89,12 @@ def draw_pretty_map(location, style, output_file):
 
 
 def main():
-    # Init args
-    parser = argparse.ArgumentParser()
-    parser.add_argument("tg_token", help="tg token")
-    options = parser.parse_args()
-    print("Arg parse done.")
+    # Read tg_token
+    env_vars = dotenv_values()
+    tg_token = env_vars["TG_TOKEN"]
 
     # Init bot
-    bot = TeleBot(options.tg_token)
+    bot = TeleBot(tg_token)
     bot.set_my_commands(
         [
             BotCommand(
